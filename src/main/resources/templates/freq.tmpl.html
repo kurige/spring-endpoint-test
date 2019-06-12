@@ -1,15 +1,17 @@
 
 <table>
     <tr>
-        <th>Word</th>
-        <th>Count</th>
-        <th>Frequency</th>
+        <th><a href="?sort=word,asc">Word</a></th>
+        <th><a href="?sort=count,desc">Count</a></th>
+        <th><a href="?sort=frequency,desc">Frequency</a></th>
     </tr>
-    {{#freqItems}}
+    {{#words.content}}
     <tr>
         <td>{{word}}</td>
         <td>{{count}}</td>
         <td>{{frequency}}</td>
     </tr>
-    {{/freqItems}}
+    {{/words.content}}
 </table>
+
+<a href="{{previous}}">Previous</a> - <a href="{{next}}">Next</a>
