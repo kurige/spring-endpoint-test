@@ -1,16 +1,15 @@
 package com.cg.endpointtest.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class FreqItem {
 
+    @Id
     private String word;
     private Integer count;
     private Double frequency;
-
-    public FreqItem(String word, Integer count, Double freq) {
-        this.word = word;
-        this.count = count;
-        this.frequency = freq;
-    }
 
     public String getWord() {
         return word;

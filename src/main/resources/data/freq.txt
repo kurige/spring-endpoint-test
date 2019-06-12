@@ -1,3 +1,4 @@
+word,count,frequency
 fawn,15,1.50945826549e-05
 nunnery,6,6.03783306197e-06
 gag,1,1.00630551033e-06
