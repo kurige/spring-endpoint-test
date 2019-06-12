@@ -1,6 +1,15 @@
 
-<div class="items">
+<table>
+    <tr>
+        <th>Word</th>
+        <th>Count</th>
+        <th>Frequency</th>
+    </tr>
     {{#freqItems}}
-    <p>{{word}}, {{count}}, {{frequency}}</p>
+    <tr>
+        <td>{{word}}</td>
+        <td>{{count}}</td>
+        <td>{{frequency}}</td>
+    </tr>
     {{/freqItems}}
-</div>
+</table>
