@@ -3,12 +3,13 @@ import re
 from operator import itemgetter
 from collections import Counter
 
-with open('freq_small.txt', 'r') as content_file:
+with open('gutenberg-100-0.txt', 'r') as content_file:
     content = content_file.read().lower()
 
 words = re.findall(r"\w+", content)
-count = Counter(words).items()
-percentages = {x: float(y) / len(words) for x, y in count}
+count = Counter(words)
+percentages = {x: float(y) / len(words) for x, y in count.items()}
 
-for name, pct in percentages.iteritems():
-    print '%s - %s' % (name, pct)
+print 'word,count,frequency'
+for word, pct in percentages.iteritems():
+    print '%s,%s,%s' % (word, count[word], pct)
