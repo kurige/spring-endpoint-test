@@ -1,6 +1,8 @@
 package com.cg.endpointtest;
 
-import com.cg.endpointtest.model.FreqItem;
+import com.cg.endpointtest.model.FreqList;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Controller;
@@ -9,13 +11,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
 
 @Controller
 public class FreqController {
+
+    private final Logger logger = LoggerFactory.getLogger(FreqController.class);
 
     @Value("classpath:data/freq.txt")
     Resource freqDocument;
@@ -23,19 +24,14 @@ public class FreqController {
     @GetMapping("/freq")
     @ResponseBody
     public ModelAndView displayFrequencyData(Map<String, Object> model) {
-        List items = new LinkedList();
-        items.add(new FreqItem("hello", 2, 0.5));
-        items.add(new FreqItem("world", 2, 0.5));
 
+        FreqList items = new FreqList();
+        try {
+            items = FreqList.parseFile(freqDocument.getFile());
+        } catch (IOException e) {
+            logger.error("Error while loading frequency data: {}", e.getMessage());
+        }
         model.put("freqItems", items);
         return new ModelAndView("freq.tmpl", model);
-    }
-
-    private String readFrequencyData() {
-        try {
-            return new String(Files.readAllBytes(freqDocument.getFile().toPath()));
-        } catch (IOException e) {
-            return String.format("Error reading frequency document: %s", e.getMessage());
-        }
     }
 }
